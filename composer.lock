@@ -3413,22 +3413,23 @@
         },
         {
             "name": "symfony/serializer",
-            "version": "v7.3.2",
+            "version": "v7.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/serializer.git",
-                "reference": "0ed011583fd24899fa003abf77c45d4a901714da"
+                "reference": "5608b04d8daaf29432d76ecc618b0fac169c2dfb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/serializer/zipball/0ed011583fd24899fa003abf77c45d4a901714da",
-                "reference": "0ed011583fd24899fa003abf77c45d4a901714da",
+                "url": "https://api.github.com/repos/symfony/serializer/zipball/5608b04d8daaf29432d76ecc618b0fac169c2dfb",
+                "reference": "5608b04d8daaf29432d76ecc618b0fac169c2dfb",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.2",
                 "symfony/deprecation-contracts": "^2.5|^3",
-                "symfony/polyfill-ctype": "~1.8"
+                "symfony/polyfill-ctype": "~1.8",
+                "symfony/polyfill-php84": "^1.30"
             },
             "conflict": {
                 "phpdocumentor/reflection-docblock": "<3.2.2",
@@ -3491,7 +3492,7 @@
             "description": "Handles serializing and deserializing data structures, including object graphs, into array structures or other formats like XML and JSON.",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/serializer/tree/v7.3.2"
+                "source": "https://github.com/symfony/serializer/tree/v7.3.3"
             },
             "funding": [
                 {
@@ -3511,7 +3512,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-07-26T13:07:17+00:00"
+            "time": "2025-08-27T11:34:33+00:00"
         },
         {
             "name": "symfony/service-contracts",
@@ -3829,16 +3830,16 @@
         },
         {
             "name": "symfony/validator",
-            "version": "v7.3.2",
+            "version": "v7.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/validator.git",
-                "reference": "e5cc60fd44aab8e1d662fc0d954da322c2e08b43"
+                "reference": "a2f26d7c122393db75a2d41435ad8251250f8bc6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/validator/zipball/e5cc60fd44aab8e1d662fc0d954da322c2e08b43",
-                "reference": "e5cc60fd44aab8e1d662fc0d954da322c2e08b43",
+                "url": "https://api.github.com/repos/symfony/validator/zipball/a2f26d7c122393db75a2d41435ad8251250f8bc6",
+                "reference": "a2f26d7c122393db75a2d41435ad8251250f8bc6",
                 "shasum": ""
             },
             "require": {
@@ -3907,7 +3908,7 @@
             "description": "Provides tools to validate values",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/validator/tree/v7.3.2"
+                "source": "https://github.com/symfony/validator/tree/v7.3.3"
             },
             "funding": [
                 {
@@ -3927,7 +3928,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-07-29T20:02:46+00:00"
+            "time": "2025-08-27T11:34:33+00:00"
         },
         {
             "name": "symfony/var-dumper",
