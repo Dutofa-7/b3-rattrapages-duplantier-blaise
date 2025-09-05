@@ -76,5 +76,6 @@ Accédez à `http://localhost:8000` pour utiliser l'interface de test qui permet
 - **Sérialisation** : Symfony Serializer
 - **Validation** : Symfony Validator
 
-## Vidéo de démonstration
+## Vidéo
 
+https://www.youtube.com/watch?v=VAODSoLoNEk
