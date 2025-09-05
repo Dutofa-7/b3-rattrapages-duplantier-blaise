@@ -15,7 +15,7 @@ class ProductFixtures extends Fixture
                 'name' => 'Pizza Margherita',
                 'description' => 'Pizza avec mozzarella et tomates',
                 'price' => 4.50,
-                'image' => 'pizza-margherita.jpg',
+                'image' => '/images/products/pizza-margherita.jpg',
                 'rating' => 4.2,
                 'isAvailable' => true
             ],
@@ -23,7 +23,7 @@ class ProductFixtures extends Fixture
                 'name' => 'Lasagnes Bolognaise',
                 'description' => 'Lasagnes traditionnelles à la sauce bolognaise',
                 'price' => 5.90,
-                'image' => 'lasagnes-bolognaise.jpg',
+                'image' => '/images/products/lasagnes-bolognaise.jpg',
                 'rating' => 4.5,
                 'isAvailable' => true
             ],
@@ -31,7 +31,7 @@ class ProductFixtures extends Fixture
                 'name' => 'Poissons Panées',
                 'description' => 'Poissons croustillantes panées',
                 'price' => 7.20,
-                'image' => 'poissons-panees.jpg',
+                'image' => '/images/products/poissons-panees.jpg',
                 'rating' => 3.8,
                 'isAvailable' => false
             ]

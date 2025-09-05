@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\CartRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CartRepository::class)]
@@ -21,18 +22,15 @@ class Cart
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?\DateTime $updatedAt = null;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $updatedAt = null;
 
-    /**
-     * @var Collection<int, CartItem>
-     */
     #[ORM\OneToMany(targetEntity: CartItem::class, mappedBy: 'cart', orphanRemoval: true)]
-    private Collection $product;
+    private Collection $cartItems;
 
     public function __construct()
     {
-        $this->product = new ArrayCollection();
+        $this->cartItems = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -64,12 +62,12 @@ class Cart
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTime
+    public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(?\DateTime $updatedAt): static
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
 
@@ -79,27 +77,27 @@ class Cart
     /**
      * @return Collection<int, CartItem>
      */
-    public function getProduct(): Collection
+    public function getCartItems(): Collection
     {
-        return $this->product;
+        return $this->cartItems;
     }
 
-    public function addProduct(CartItem $product): static
+    public function addCartItem(CartItem $cartItem): static
     {
-        if (!$this->product->contains($product)) {
-            $this->product->add($product);
-            $product->setCart($this);
+        if (!$this->cartItems->contains($cartItem)) {
+            $this->cartItems->add($cartItem);
+            $cartItem->setCart($this);
         }
 
         return $this;
     }
 
-    public function removeProduct(CartItem $product): static
+    public function removeCartItem(CartItem $cartItem): static
     {
-        if ($this->product->removeElement($product)) {
+        if ($this->cartItems->removeElement($cartItem)) {
             // set the owning side to null (unless already changed)
-            if ($product->getCart() === $this) {
-                $product->setCart(null);
+            if ($cartItem->getCart() === $this) {
+                $cartItem->setCart(null);
             }
         }
 

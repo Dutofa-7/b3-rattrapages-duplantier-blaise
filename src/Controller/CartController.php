@@ -3,13 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Cart;
-use App\Repository\CartRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\SerializerInterface;
 
 #[Route('/api')]
 class CartController extends AbstractController
@@ -24,24 +22,56 @@ class CartController extends AbstractController
         $em->persist($cart);
         $em->flush();
         
-        return new JsonResponse(['id' => $cart->getId(), 'status' => $cart->getStatus()], Response::HTTP_CREATED);
+        return new JsonResponse([
+            'id' => $cart->getId(),
+            'status' => $cart->getStatus()
+        ]);
     }
 
     #[Route('/carts/{id}', name: 'get_cart', methods: ['GET'])]
-    public function getCart(Cart $cart, SerializerInterface $serializer): JsonResponse
+    public function getCart(int $id, EntityManagerInterface $em): JsonResponse
     {
-        $data = $serializer->serialize($cart, 'json', ['groups' => ['cart']]);
+        $cart = $em->getRepository(Cart::class)->find($id);
         
-        return new JsonResponse($data, Response::HTTP_OK, [], true);
+        if (!$cart) {
+            return new JsonResponse(['error' => 'Cart not found'], 404);
+        }
+        
+        $cartData = [
+            'id' => $cart->getId(),
+            'status' => $cart->getStatus(),
+            'cartItems' => []
+        ];
+        
+        foreach ($cart->getCartItems() as $item) {
+            $cartData['cartItems'][] = [
+                'id' => $item->getId(),
+                'quantity' => $item->getQuantity(),
+                'product' => [
+                    'id' => $item->getProduct()->getId(),
+                    'name' => $item->getProduct()->getName(),
+                    'price' => (float) $item->getProduct()->getPrice(),
+                    'description' => $item->getProduct()->getDescription(),
+                ]
+            ];
+        }
+        
+        return new JsonResponse($cartData);
     }
 
     #[Route('/carts/{id}/validate', name: 'validate_cart', methods: ['PATCH'])]
-    public function validateCart(Cart $cart, EntityManagerInterface $em): JsonResponse
+    public function validateCart(int $id, EntityManagerInterface $em): JsonResponse
     {
+        $cart = $em->getRepository(Cart::class)->find($id);
+        
+        if (!$cart) {
+            return new JsonResponse(['error' => 'Cart not found'], 404);
+        }
+        
         $cart->setStatus('validated');
         $cart->setUpdatedAt(new \DateTime());
         $em->flush();
         
-        return new JsonResponse(['message' => 'Cart validated successfully'], Response::HTTP_OK);
+        return new JsonResponse(['message' => 'Cart validated successfully']);
     }
 }
